@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+
+<head>
+<title>AngularJS Interactive Programs</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background-attachment: fixed;
+    color: #f8fafc;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    background: linear-gradient(90deg, #7c3aed, #db2777);
+    color: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #a855f766;
+}
+
+.card {
+    background: linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.22),
+        rgba(219, 39, 119, 0.14)
+    );
+    border: 1px solid rgba(216, 180, 254, 0.35);
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 650px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    color: #e9d5ff;
+    text-shadow: 0 0 10px #a855f7;
+}
+
+h3 {
+    color: #f0abfc;
+}
+
+p {
+    color: #e2e8f0;
+}
+
+input, textarea, select {
+    padding: 12px;
+    margin: 8px;
+    width: 85%;
+    max-width: 500px;
+    color: white;
+    background: #201b42;
+    border: 1px solid #a78bfa;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #f0abfc;
+    box-shadow: 0 0 10px #c084fc;
+}
+
+select option {
+    background: #201b42;
+    color: white;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #c4b5fd;
+}
+
+button {
+    padding: 11px 20px;
+    background: linear-gradient(90deg, #7c3aed, #db2777);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px #c084fc;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: rgba(15, 12, 41, 0.7);
+    color: #f5d0fe;
+    border: 1px solid #6d28d9;
+    margin: 10px 0;
+    padding: 13px;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+    text-align: left;
+}
+
+.remove {
+    float: right;
+    background: #be185d;
+    padding: 4px 10px;
+}
+
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    color: #86efac;
+    margin: 20px;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    color: #d8b4fe;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body ng-controller="MainController">
+
+<h1>AngularJS Interactive Programs</h1>
+
+<p>Register Number: URK24CS9029</p>
+
+<!-- QUESTION 1: COMMENT BOX -->
+
+<div class="card">
+
+    <h2>1. Simple Comment Box</h2>
+
+    <p>Post your Comment</p>
+
+    <textarea
+        ng-model="txtcomment"
+        placeholder="Write your comment here..."
+        rows="3">
+    </textarea>
+
+    <br>
+
+    <button ng-click="btn_add()">Post Comment</button>
+
+    <h3>Comments</h3>
+
+    <ul>
+        <li ng-repeat="comnt in comment track by $index">
+
+            {{ comnt }}
+
+            <button class="remove"
+                ng-click="remItem($index)">x</button>
+
+        </li>
+    </ul>
+
+    <p ng-if="comment.length == 0">
+        No comments yet. Be the first to comment!
+    </p>
+
+</div>
+
+
+<!-- QUESTION 2: SIMPLE CALCULATOR -->
+
+<div class="card">
+
+    <h2>2. Simple Calculator</h2>
+
+    <p>Enter the first number</p>
+
+    <input type="number"
+        ng-model="a"
+        placeholder="First number">
+
+    <p>Enter the second number</p>
+
+    <input type="number"
+        ng-model="b"
+        placeholder="Second number">
+
+    <p>Select an operator</p>
+
+    <select ng-model="operator">
+
+        <option value="+">Addition (+)</option>
+        <option value="-">Subtraction (-)</option>
+        <option value="*">Multiplication (*)</option>
+        <option value="/">Division (/)</option>
+
+    </select>
+
+    <div class="result">
+        Result: {{ result() }}
+    </div>
+
+</div>
+
+
+<!-- QUESTION 3: TODO LIST -->
+
+<div class="card">
+
+    <h2>3. Simple To-Do List</h2>
+
+    <p>Enter a task to add to your list</p>
+
+    <input type="text"
+        ng-model="title"
+        placeholder="Enter your task">
+
+    <br>
+
+    <button ng-click="add()">Add Task</button>
+
+    <h3>My Tasks</h3>
+
+    <ul>
+
+        <li ng-repeat="t in tasks track by $index">
+
+            {{ t }}
+
+            <button class="remove"
+                ng-click="removeTask($index)">x</button>
+
+        </li>
+
+    </ul>
+
+    <p ng-if="tasks.length == 0">
+        Your task list is empty.
+    </p>
+
+</div>
+
+<footer>
+
+    <p>Designed using HTML, CSS and AngularJS</p>
+
+    <p>URK24CS9029 | All Rights Reserved</p>
+
+</footer>
+
+
+<script>
+
+var app = angular.module("MyApp", []);
+
+app.controller("MainController", function($scope) {
+
+    // QUESTION 1: COMMENT BOX
+
+    $scope.comment = [];
+
+    $scope.btn_add = function() {
+
+        if ($scope.txtcomment &&
+            $scope.txtcomment.trim() !== "") {
+
+            $scope.comment.push(
+                $scope.txtcomment.trim()
+            );
+
+            $scope.txtcomment = "";
+        }
+    };
+
+    $scope.remItem = function(index) {
+
+        $scope.comment.splice(index, 1);
+
+    };
+
+
+    // QUESTION 2: SIMPLE CALCULATOR
+
+    $scope.a = 0;
+    $scope.b = 0;
+    $scope.operator = "+";
+
+    $scope.result = function() {
+
+        var a = Number($scope.a);
+        var b = Number($scope.b);
+
+        if ($scope.operator == "+") {
+            return a + b;
+        }
+
+        if ($scope.operator == "-") {
+            return a - b;
+        }
+
+        if ($scope.operator == "*") {
+            return a * b;
+        }
+
+        if ($scope.operator == "/") {
+
+            if (b === 0) {
+                return "Cannot divide by zero";
+            }
+
+            return a / b;
+        }
+
+    };
+
+
+    // QUESTION 3: TODO LIST
+
+    $scope.tasks = [];
+
+    $scope.add = function() {
+
+        if ($scope.title &&
+            $scope.title.trim() !== "") {
+
+            $scope.tasks.push(
+                $scope.title.trim()
+            );
+
+            $scope.title = "";
+        }
+
+    };
+
+    $scope.removeTask = function(index) {
+
+        $scope.tasks.splice(index, 1);
+
+    };
+
+});
+
+</script>
+
+</body>
+</html>
