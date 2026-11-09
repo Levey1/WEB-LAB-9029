@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Programs 1 to 6</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b0082, #a855f7, #e9d5ff);
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #7e22ce;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 7px 0;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input, select {
+            max-width: 100%;
+        }
+
+        button {
+            background: #7e22ce;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #581c87;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f3e8ff;
+            border-radius: 8px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .fruit-grid {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: start;
+        }
+
+        .fruit {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f3e8ff;
+            border-radius: 10px;
+            font-size: 35px;
+        }
+
+        .coin {
+            font-size: 75px;
+            margin: 15px 0;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>JavaScript Interactive Programs</h1>
+    <p>Register Number: URK24CS9029</p>
+</header>
+
+<div class="container">
+
+    <!-- QUESTION 1 -->
+    <div class="card">
+        <h2>Question 1: Shortest and Longest Word</h2>
+
+        <p>Enter a sentence to find its shortest and longest words.</p>
+
+        <input type="text" id="sentence"
+               placeholder="Enter a sentence"
+               style="width: 100%;">
+
+        <button onclick="findWords()">Find Words</button>
+
+        <div id="wordResult" class="result">
+            Result will appear here.
+        </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="card">
+        <h2>Question 2: BMI Calculator</h2>
+
+        <p>Enter your weight and height to calculate BMI.</p>
+
+        <label>Weight (kg):</label>
+        <input type="number" id="weight"
+               placeholder="Weight in kg" min="1" step="any">
+
+        <br>
+
+        <label>Height (m):</label>
+        <input type="number" id="height"
+               placeholder="Height in metres" min="0.1" step="any">
+
+        <br>
+
+        <button onclick="calculateBMI()">Calculate BMI</button>
+
+        <div id="bmiResult" class="result">
+            BMI result will appear here.
+        </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="card">
+        <h2>Question 3: Fruit Farm</h2>
+
+        <p>Enter the number of rows and columns to generate the fruit farm.</p>
+
+        <label>Rows:</label>
+        <input type="number" id="rows" min="1" max="10" value="3">
+
+        <br>
+
+        <label>Columns:</label>
+        <input type="number" id="columns" min="1" max="10" value="4">
+
+        <br>
+
+        <button onclick="generateFarm()">Generate Farm</button>
+
+        <div id="fruitFarm" class="fruit-grid"></div>
+
+        <p>🍎 Apple &nbsp;&nbsp; 🍊 Orange</p>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="card">
+        <h2>Question 4: Currency Converter</h2>
+
+        <p>Convert between Indian Rupees (INR) and US Dollars (USD).</p>
+
+        <input type="number" id="amount"
+               placeholder="Enter amount" min="0" step="any">
+
+        <br>
+
+        <label>Conversion:</label>
+
+        <select id="currency">
+            <option value="inrToUsd">INR to USD</option>
+            <option value="usdToInr">USD to INR</option>
+        </select>
+
+        <br>
+
+        <button onclick="convertCurrency()">Convert</button>
+
+        <div id="currencyResult" class="result">
+            Converted amount will appear here.
+        </div>
+
+        <p>Conversion rates used: 1 INR = 0.015 USD; 1 USD = ₹67.12.</p>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="card">
+        <h2>Question 5: Coin Flip</h2>
+
+        <p>Click the button to randomly flip a coin.</p>
+
+        <div id="coin" class="coin">●</div>
+
+        <h3 id="coinResult">Ready to flip!</h3>
+
+        <button onclick="flipCoin()">Flip Coin</button>
+
+        <div class="result">
+            Heads: <span id="headsCount">0</span>
+            <br><br>
+            Tails: <span id="tailsCount">0</span>
+        </div>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div class="card">
+        <h2>Question 6: Birthday Cake Order</h2>
+
+        <p>Select a cake size and tip percentage to calculate your bill.</p>
+
+        <form id="cakeForm">
+
+            <p><strong>Select Cake Size:</strong></p>
+
+            <label>
+                <input type="radio" name="cake" value="100" required>
+                0.5 kg - ₹100
+            </label>
+
+            <br>
+
+            <label>
+                <input type="radio" name="cake" value="200">
+                1 kg - ₹200
+            </label>
+
+            <br>
+
+            <label>
+                <input type="radio" name="cake" value="400">
+                2 kg - ₹400
+            </label>
+
+            <p><strong>Select Tip:</strong></p>
+
+            <select id="tip">
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+            </select>
+
+            <br>
+
+            <button type="submit">Calculate Cake Bill</button>
+            <button type="reset">Clear</button>
+
+        </form>
+
+        <div id="cakeResult" class="result">
+            Your cake bill will appear here.
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>JavaScript Programs 1–6 | URK24CS9029</p>
+</footer>
+
+<script>
+
+    // QUESTION 1: Find the shortest and longest word
+    function findWords() {
+        let sentence = document.getElementById("sentence").value.trim();
+        let result = document.getElementById("wordResult");
+
+        if (sentence === "") {
+            result.textContent = "Please enter a sentence.";
+            return;
+        }
+
+        let words = sentence.split(/\s+/);
+
+        let shortest = words[0];
+        let longest = words[0];
+
+        for (let word of words) {
+
+            if (word.length < shortest.length) {
+                shortest = word;
+            }
+
+            if (word.length > longest.length) {
+                longest = word;
+            }
+        }
+
+        result.innerHTML =
+            "Shortest Word: " + shortest +
+            "<br>Longest Word: " + longest;
+    }
+
+    // QUESTION 2: Calculate BMI
+    function calculateBMI() {
+        let weight = parseFloat(document.getElementById("weight").value);
+        let height = parseFloat(document.getElementById("height").value);
+        let result = document.getElementById("bmiResult");
+
+        if (isNaN(weight) || isNaN(height) ||
+            weight <= 0 || height <= 0) {
+            result.textContent =
+                "Please enter valid weight and height.";
+            return;
+        }
+
+        let bmi = weight / (height * height);
+        let type;
+
+        if (bmi < 18) {
+            type = "Underweight";
+        } else if (bmi < 25) {
+            type = "Normal";
+        } else if (bmi <= 30) {
+            type = "Overweight";
+        } else {
+            type = "Obese";
+        }
+
+        result.innerHTML =
+            "Your BMI: " + bmi.toFixed(2) +
+            "<br>Category: " + type;
+    }
+
+    // QUESTION 3: Generate Fruit Farm
+    function generateFarm() {
+        let rows = parseInt(document.getElementById("rows").value);
+        let columns = parseInt(document.getElementById("columns").value);
+        let farm = document.getElementById("fruitFarm");
+
+        farm.innerHTML = "";
+
+        if (isNaN(rows) || isNaN(columns) ||
+            rows < 1 || columns < 1 ||
+            rows > 10 || columns > 10) {
+            farm.textContent =
+                "Please enter rows and columns between 1 and 10.";
+            return;
+        }
+
+        farm.style.gridTemplateColumns =
+            "repeat(" + columns + ", 65px)";
+
+        let fruits = ["🍎", "🍊"];
+
+        for (let i = 0; i < rows * columns; i++) {
+            let fruit = document.createElement("div");
+
+            fruit.className = "fruit";
+
+            fruit.textContent =
+                fruits[Math.floor(Math.random() * fruits.length)];
+
+            farm.appendChild(fruit);
+        }
+    }
+
+    // QUESTION 4: Currency Converter
+    function convertCurrency() {
+        let amount = parseFloat(document.getElementById("amount").value);
+        let currency = document.getElementById("currency").value;
+        let result = document.getElementById("currencyResult");
+
+        if (isNaN(amount) || amount < 0) {
+            result.textContent = "Please enter a valid amount.";
+            return;
+        }
+
+        let converted;
+
+        if (currency === "inrToUsd") {
+            converted = amount * 0.015;
+
+            result.textContent =
+                "USD: $" + converted.toFixed(2);
+        } else {
+            converted = amount * 67.12;
+
+            result.textContent =
+                "INR: ₹" + converted.toFixed(2);
+        }
+    }
+
+    // QUESTION 5: Coin Flip
+    let heads = 0;
+    let tails = 0;
+
+    function flipCoin() {
+        let result = Math.floor(Math.random() * 2);
+        let coin = document.getElementById("coin");
+        let coinResult = document.getElementById("coinResult");
+
+        if (result === 0) {
+            heads++;
+
+            coin.textContent = "●";
+            coinResult.textContent = "Heads!";
+        } else {
+            tails++;
+
+            coin.textContent = "◉";
+            coinResult.textContent = "Tails!";
+        }
+
+        document.getElementById("headsCount").textContent = heads;
+        document.getElementById("tailsCount").textContent = tails;
+    }
+
+    // QUESTION 6: Birthday Cake Order
+    document.getElementById("cakeForm").addEventListener("submit",
+        function(event) {
+            event.preventDefault();
+
+            let selectedCake =
+                document.querySelector('input[name="cake"]:checked');
+
+            let tipPercent =
+                parseFloat(document.getElementById("tip").value);
+
+            let result = document.getElementById("cakeResult");
+
+            if (!selectedCake) {
+                result.textContent = "Please select a cake size.";
+                return;
+            }
+
+            let price = parseFloat(selectedCake.value);
+
+            let tax = price * 0.09;
+            let afterTax = price + tax;
+            let tipAmount = afterTax * tipPercent / 100;
+            let total = afterTax + tipAmount;
+
+            result.innerHTML =
+                "Cake Price: ₹" + price.toFixed(2) +
+                "<br>Tax (9%): ₹" + tax.toFixed(2) +
+                "<br>Tip (" + tipPercent + "%): ₹" +
+                tipAmount.toFixed(2) +
+                "<br><strong>Total Bill: ₹" +
+                total.toFixed(2) + "</strong>";
+        }
+    );
+
+    // Clear the previous bill when the form is reset
+    document.getElementById("cakeForm").addEventListener("reset",
+        function() {
+            document.getElementById("cakeResult").textContent =
+                "Your cake bill will appear here.";
+        }
+    );
+
+</script>
+
+</body>
+</html>
