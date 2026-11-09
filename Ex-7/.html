@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Programs 1 to 3</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f3e8ff;
+    text-align: center;
+    margin: 20px;
+}
+
+h1 {
+    background: #581c87;
+    color: white;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    margin: 25px auto;
+    padding: 20px;
+    max-width: 850px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #bbb;
+}
+
+h2 {
+    color: #7e22ce;
+}
+
+input {
+    padding: 8px;
+    margin: 6px;
+    max-width: 90%;
+}
+
+button {
+    background: #6d28d9;
+    color: white;
+    padding: 10px;
+    margin: 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4c1d95;
+}
+
+.result {
+    margin: 15px;
+    font-weight: bold;
+    color: #166534;
+}
+
+.box {
+    display: inline-block;
+    padding: 15px;
+    margin: 5px;
+    color: white;
+}
+
+#rent { background: blue; }
+#accessories { background: green; }
+#emergency { background: blue; }
+#saving { background: deeppink; }
+
+.cakes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cake {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 140px;
+}
+
+.picture {
+    font-size: 55px;
+    background: #fff0f5;
+    padding: 10px;
+}
+
+.car {
+    position: relative;
+    width: 280px;
+    height: 170px;
+    margin: 30px auto;
+}
+
+.roof {
+    position: absolute;
+    top: 15px;
+    left: 75px;
+    width: 130px;
+    height: 65px;
+    background: green;
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+}
+
+.body {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    width: 240px;
+    height: 55px;
+    background: lawngreen;
+}
+
+.window {
+    position: absolute;
+    top: 25px;
+    left: 105px;
+    width: 70px;
+    height: 35px;
+    background: lightblue;
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+}
+
+.wheel {
+    position: absolute;
+    top: 105px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #171b50;
+}
+
+.left { left: 55px; }
+.right { right: 55px; }
+
+footer {
+    color: #581c87;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>HTML, CSS and jQuery Programs</h1>
+<p>Register Number: URK24CS9029</p>
+
+<!-- QUESTION 1 -->
+
+<div class="card">
+
+<h2>1. Budget Calculator</h2>
+
+<p>Enter Amount to Manage</p>
+<input type="number" id="amount" value="15000">
+
+<p>Divide Your Money (%)</p>
+
+Room Rent
+<input type="number" id="rentPercent" value="50"><br>
+
+Accessories
+<input type="number" id="accessPercent" value="20"><br>
+
+Emergency
+<input type="number" id="emergencyPercent" value="20"><br>
+
+Saving
+<input type="number" id="savingPercent" value="10"><br>
+
+<button id="evaluate">Evaluate My Money</button>
+
+<div>
+    <div class="box" id="rent">Room Rent<br>Rs.0</div>
+    <div class="box" id="accessories">Accessories<br>Rs.0</div>
+    <div class="box" id="emergency">Emergency<br>Rs.0</div>
+    <div class="box" id="saving">Saving<br>Rs.0</div>
+</div>
+
+</div>
+
+<!-- QUESTION 2 -->
+
+<div class="card">
+
+<h2>2. Cake Shop Order</h2>
+
+<div class="cakes">
+
+<div class="cake">
+    <div class="picture">🎂</div>
+    Color Cake<br>Rs.300
+</div>
+
+<div class="cake">
+    <div class="picture">🍰</div>
+    Brown Cake<br>Rs.200
+</div>
+
+<div class="cake">
+    <div class="picture">🍥</div>
+    Milky Cake<br>Rs.250
+</div>
+
+<div class="cake">
+    <div class="picture">🍫</div>
+    Black Forest<br>Rs.350
+</div>
+
+</div>
+
+<h3>Order Cake</h3>
+
+Color Cake Quantity<br>
+<input type="number" id="q1" value="2" min="0"><br>
+
+Brown Cake Quantity<br>
+<input type="number" id="q2" value="1" min="0"><br>
+
+Milky Cake Quantity<br>
+<input type="number" id="q3" value="2" min="0"><br>
+
+Black Forest Cake Quantity<br>
+<input type="number" id="q4" value="1" min="0"><br>
+
+<button id="order">Place Order</button>
+
+<h3>Purchase Order Bill!</h3>
+
+<div class="result" id="cakeTotal">
+Total Price: Rs.0
+</div>
+
+</div>
+
+<!-- QUESTION 3 -->
+
+<div class="card">
+
+<h2>3. Car Body Workshop</h2>
+
+<div class="car">
+
+<div class="roof"></div>
+<div class="window"></div>
+<div class="body"></div>
+<div class="wheel left"></div>
+<div class="wheel right"></div>
+
+</div>
+
+<button id="bodyColor">Change Body Color</button>
+
+<button id="glassColor">Change Glass Tint</button>
+
+<button id="increase">Tyre Size Increase</button>
+
+<button id="decrease">Tyre Size Decrease</button>
+
+<button id="reset">Reset</button>
+
+</div>
+
+<footer>
+All Three Programs in One Website
+</footer>
+
+<script>
+
+$(document).ready(function() {
+
+// QUESTION 1: Budget Calculator
+
+$("#evaluate").click(function() {
+
+    let amount = Number($("#amount").val());
+
+    let r = Number($("#rentPercent").val());
+    let a = Number($("#accessPercent").val());
+    let e = Number($("#emergencyPercent").val());
+    let s = Number($("#savingPercent").val());
+
+    let total = r + a + e + s;
+
+    if ($("#amount").val() === "" || amount <= 0 ||
+        r < 0 || a < 0 || e < 0 || s < 0 ||
+        total !== 100) {
+
+        alert("Enter a valid amount and percentages totaling 100%.");
+        return;
+    }
+
+    $("#rent").html("Room Rent<br>Rs." + (amount*r/100).toFixed(2));
+
+    $("#accessories").html("Accessories<br>Rs." + (amount*a/100).toFixed(2));
+
+    $("#emergency").html("Emergency<br>Rs." + (amount*e/100).toFixed(2));
+
+    $("#saving").html("Saving<br>Rs." + (amount*s/100).toFixed(2));
+
+});
+
+
+// QUESTION 2: Cake Shop
+
+$("#order").click(function() {
+
+    let q1 = Number($("#q1").val());
+    let q2 = Number($("#q2").val());
+    let q3 = Number($("#q3").val());
+    let q4 = Number($("#q4").val());
+
+    if ($("#q1").val() === "" || $("#q2").val() === "" ||
+        $("#q3").val() === "" || $("#q4").val() === "" ||
+        q1 < 0 || q2 < 0 || q3 < 0 || q4 < 0 ||
+        !Number.isInteger(q1) || !Number.isInteger(q2) ||
+        !Number.isInteger(q3) || !Number.isInteger(q4)) {
+
+        alert("Enter valid whole-number quantities.");
+        return;
+    }
+
+    let total = q1*300 + q2*200 + q3*250 + q4*350;
+
+    $("#cakeTotal").text("Total Price: Rs." + total);
+
+});
+
+
+// QUESTION 3: Car Body Workshop
+
+let bodyColors = ["red", "blue", "yellow", "orange", "purple"];
+
+let glassColors = ["lightblue", "black", "gray", "lightgreen"];
+
+let bodyIndex = -1;
+let glassIndex = -1;
+let tyreSize = 55;
+
+$("#bodyColor").click(function() {
+
+    bodyIndex = (bodyIndex + 1) % bodyColors.length;
+
+    $(".body").css("background-color", bodyColors[bodyIndex]);
+
+});
+
+$("#glassColor").click(function() {
+
+    glassIndex = (glassIndex + 1) % glassColors.length;
+
+    $(".window").css("background-color", glassColors[glassIndex]);
+
+});
+
+$("#increase").click(function() {
+
+    if (tyreSize < 85) {
+
+        tyreSize += 10;
+
+        $(".wheel").css({
+            width: tyreSize + "px",
+            height: tyreSize + "px"
+        });
+
+    }
+
+});
+
+$("#decrease").click(function() {
+
+    if (tyreSize > 35) {
+
+        tyreSize -= 10;
+
+        $(".wheel").css({
+            width: tyreSize + "px",
+            height: tyreSize + "px"
+        });
+
+    }
+
+});
+
+$("#reset").click(function() {
+
+    bodyIndex = -1;
+    glassIndex = -1;
+    tyreSize = 55;
+
+    $(".body").css("background-color", "lawngreen");
+
+    $(".window").css("background-color", "lightblue");
+
+    $(".wheel").css({
+        width: "55px",
+        height: "55px"
+    });
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
