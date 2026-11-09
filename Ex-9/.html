@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyWebsite">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+
+    <!-- AngularJS Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px;
+            background: rgba(10, 8, 35, 0.9);
+        }
+
+        header h1 {
+            color: #e0b3ff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            color: white;
+            background: #6c3bbd;
+            padding: 10px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background: #e84393;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #f0abfc;
+        }
+
+        .emoji {
+            text-align: center;
+            font-size: 45px;
+            margin: 15px;
+        }
+
+        /* Registration form */
+        .registration {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .registration h2 {
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .form-row > label {
+            padding-top: 10px;
+        }
+
+        input:not([type="radio"]),
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #a78bfa;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .error {
+            color: #ff9eaf;
+            font-size: 13px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: #86efac;
+            font-weight: bold;
+        }
+
+        button {
+            background: linear-gradient(90deg, #9333ea, #db2777);
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #777;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .course {
+            background: rgba(137, 78, 220, 0.25);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        @media (max-width: 550px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .form-row > label {
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body ng-controller="WebsiteController">
+
+    <header>
+        <h1>My Personal Website</h1>
+        <p>Learn • Explore • Grow</p>
+        <p>Register Number: URK24CS9029</p>
+    </header>
+
+    <!-- Navigation using AngularJS Routing -->
+    <nav>
+        <a href="#!/">Home</a>
+        <a href="#!/about">About</a>
+        <a href="#!/courses">Courses</a>
+        <a href="#!/contact">Contact</a>
+        <a href="#!/registration">Registration</a>
+    </nav>
+
+    <!-- Routed pages appear here -->
+    <div class="container">
+        <div ng-view></div>
+    </div>
+
+    <footer>
+        <p>© 2026 My Personal Website</p>
+        <p>Created using HTML, CSS and AngularJS</p>
+    </footer>
+
+    <!-- PAGE 1: HOME -->
+    <script type="text/ng-template" id="home.html">
+        <div class="card">
+            <div class="emoji">🏠</div>
+
+            <h2>Welcome to My Website!</h2>
+
+            <p>
+                Welcome to my personal website. This website provides
+                information about me, my interests and my technical courses.
+            </p>
+
+            <p>
+                Explore the pages to learn about web development,
+                programming and student registration.
+            </p>
+
+            <h3>Website Features</h3>
+
+            <ul>
+                <li>Personal information</li>
+                <li>Technical courses</li>
+                <li>Registration form with validation</li>
+                <li>Contact form</li>
+            </ul>
+        </div>
+    </script>
+
+    <!-- PAGE 2: ABOUT -->
+    <script type="text/ng-template" id="about.html">
+        <div class="card">
+            <div class="emoji">👩‍🎓</div>
+
+            <h2>About Me</h2>
+
+            <p>
+                I am a B.Tech Computer Science student interested in
+                programming, web development and technology.
+            </p>
+
+            <p>
+                I enjoy learning new skills, solving problems and
+                developing useful applications.
+            </p>
+
+            <h3>My Interests</h3>
+
+            <ul>
+                <li>Web Development</li>
+                <li>Python Programming</li>
+                <li>Database Management</li>
+                <li>Learning New Technologies</li>
+            </ul>
+
+            <h3>My Goal</h3>
+
+            <p>
+                My goal is to become a skilled software professional.
+            </p>
+        </div>
+    </script>
+
+    <!-- PAGE 3: COURSES -->
+    <script type="text/ng-template" id="courses.html">
+        <div class="card">
+            <h2>My Courses</h2>
+            <p>Some technical subjects I am learning.</p>
+
+            <div class="course-list">
+
+                <div class="course">
+                    <div class="emoji">💻</div>
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS and web design.</p>
+                </div>
+
+                <div class="course">
+                    <div class="emoji">🐍</div>
+                    <h3>Python</h3>
+                    <p>Programming and problem-solving.</p>
+                </div>
+
+                <div class="course">
+                    <div class="emoji">🗄️</div>
+                    <h3>DBMS</h3>
+                    <p>Databases and SQL queries.</p>
+                </div>
+
+                <div class="course">
+                    <div class="emoji">🌐</div>
+                    <h3>AngularJS</h3>
+                    <p>Dynamic pages and routing.</p>
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+    <!-- PAGE 4: CONTACT -->
+    <script type="text/ng-template" id="contact.html">
+        <div class="card">
+            <h2>Contact Me</h2>
+            <p>Fill out the form to submit a message.</p>
+
+            <form name="contactForm"
+                  ng-submit="sendMessage()"
+                  novalidate>
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="contactName"
+                       ng-model="contact.name"
+                       placeholder="Enter your name"
+                       required>
+
+                <span class="error"
+                      ng-if="contactForm.contactName.$touched &&
+                      contactForm.contactName.$invalid">
+                    Name is required.
+                </span>
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="contactEmail"
+                       ng-model="contact.email"
+                       placeholder="Enter your email"
+                       required>
+
+                <span class="error"
+                      ng-if="contactForm.contactEmail.$touched &&
+                      contactForm.contactEmail.$invalid">
+                    Enter a valid email.
+                </span>
+
+                <label>Message</label>
+
+                <textarea name="contactMessage"
+                          ng-model="contact.message"
+                          rows="4"
+                          placeholder="Write your message"
+                          required></textarea>
+
+                <br><br>
+
+                <button type="submit"
+                        ng-disabled="contactForm.$invalid">
+                    Send Message
+                </button>
+
+            </form>
+
+            <p class="success" ng-if="messageSent">
+                Message submitted successfully!
+            </p>
+        </div>
+    </script>
+
+    <!-- PAGE 5: REGISTRATION -->
+    <script type="text/ng-template" id="registration.html">
+        <div class="card registration">
+
+            <h2>User Registration Form</h2>
+
+            <form name="regForm"
+                  ng-submit="submitRegistration()"
+                  novalidate>
+
+                <!-- Name -->
+                <div class="form-row">
+                    <label>Name <span style="color:red">*</span></label>
+
+                    <div>
+                        <input type="text"
+                               name="name"
+                               ng-model="user.name"
+                               ng-pattern="/^[A-Za-z ]+$/"
+                               placeholder="Enter name"
+                               required>
+
+                        <span class="error"
+                              ng-if="regForm.name.$touched &&
+                              regForm.name.$error.required">
+                            Name is required.
+                        </span>
+
+                        <span class="error"
+                              ng-if="regForm.name.$touched &&
+                              regForm.name.$error.pattern">
+                            Name must not contain numbers.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-row">
+                    <label>Password <span style="color:red">*</span></label>
+
+                    <div>
+                        <input type="password"
+                               name="password"
+                               ng-model="user.password"
+                               ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/"
+                               placeholder="Enter password"
+                               required>
+
+                        <span class="error"
+                              ng-if="regForm.password.$touched &&
+                              regForm.password.$invalid">
+                            Use at least 8 characters, with uppercase,
+                            lowercase and a number.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Age -->
+                <div class="form-row">
+                    <label>Age <span style="color:red">*</span></label>
+
+                    <div>
+                        <input type="number"
+                               name="age"
+                               ng-model="user.age"
+                               min="18"
+                               max="30"
+                               step="1"
+                               placeholder="18 to 30"
+                               required>
+
+                        <span class="error"
+                              ng-if="regForm.age.$touched &&
+                              regForm.age.$invalid">
+                            Age must be a whole number from 18 to 30.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Mobile -->
+                <div class="form-row">
+                    <label>Mobile Number <span style="color:red">*</span></label>
+
+                    <div>
+                        <input type="text"
+                               name="mobile"
+                               ng-model="user.mobile"
+                               ng-pattern="/^[0-9]{10}$/"
+                               placeholder="10-digit mobile number"
+                               required>
+
+                        <span class="error"
+                              ng-if="regForm.mobile.$touched &&
+                              regForm.mobile.$invalid">
+                            Mobile number must contain exactly 10 digits.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-row">
+                    <label>Email <span style="color:red">*</span></label>
+
+                    <div>
+                        <input type="email"
+                               name="email"
+                               ng-model="user.email"
+                               placeholder="Enter email"
+                               required>
+
+                        <span class="error"
+                              ng-if="regForm.email.$touched &&
+                              regForm.email.$invalid">
+                            Enter a valid email address.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-row">
+                    <label>Gender <span style="color:red">*</span></label>
+
+                    <div>
+                        <label>
+                            <input type="radio"
+                                   name="gender"
+                                   ng-model="user.gender"
+                                   value="Male"
+                                   required>
+                            Male
+                        </label>
+
+                        <label>
+                            <input type="radio"
+                                   name="gender"
+                                   ng-model="user.gender"
+                                   value="Female"
+                                   required>
+                            Female
+                        </label>
+
+                        <span class="error"
+                              ng-if="regForm.gender.$touched &&
+                              regForm.gender.$invalid">
+                            Please select your gender.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- State -->
+                <div class="form-row">
+                    <label>State <span style="color:red">*</span></label>
+
+                    <div>
+                        <select name="state"
+                                ng-model="user.state"
+                                required>
+
+                            <option value="Tamilnadu">Tamilnadu</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+
+                        <span class="error"
+                              ng-if="regForm.state.$touched &&
+                              regForm.state.$invalid">
+                            State is required.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="buttons">
+
+                    <button type="submit"
+                            ng-disabled="regForm.$invalid">
+                        Submit
+                    </button>
+
+                    <button type="button"
+                            ng-click="clearRegistration()">
+                        Clear
+                    </button>
+
+                </div>
+
+            </form>
+
+            <p class="success" ng-if="registrationSuccess">
+                Registration successful!
+            </p>
+
+        </div>
+    </script>
+
+    <!-- ANGULARJS ROUTING -->
+    <script>
+        var app = angular.module("MyWebsite", ["ngRoute"]);
+
+        app.config(function($routeProvider) {
+
+            $routeProvider
+
+                .when("/", {
+                    templateUrl: "home.html"
+                })
+
+                .when("/about", {
+                    templateUrl: "about.html"
+                })
+
+                .when("/courses", {
+                    templateUrl: "courses.html"
+                })
+
+                .when("/contact", {
+                    templateUrl: "contact.html"
+                })
+
+                .when("/registration", {
+                    templateUrl: "registration.html"
+                })
+
+                .otherwise({
+                    redirectTo: "/"
+                });
+        });
+
+        app.controller("WebsiteController", function($scope) {
+
+            $scope.user = {
+                state: "Tamilnadu"
+            };
+
+            $scope.contact = {};
+
+            $scope.submitRegistration = function() {
+                $scope.registrationSuccess = true;
+            };
+
+            $scope.clearRegistration = function() {
+
+                $scope.user = {
+                    state: "Tamilnadu"
+                };
+
+                $scope.registrationSuccess = false;
+
+                if ($scope.regForm) {
+                    $scope.regForm.$setPristine();
+                    $scope.regForm.$setUntouched();
+                }
+            };
+
+            $scope.sendMessage = function() {
+
+                $scope.messageSent = true;
+                $scope.contact = {};
+
+                if ($scope.contactForm) {
+                    $scope.contactForm.$setPristine();
+                    $scope.contactForm.$setUntouched();
+                }
+            };
+
+        });
+    </script>
+
+</body>
+</html>
