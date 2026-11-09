@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Lab - URK24CS9029</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: white;
+    background:
+    radial-gradient(circle at top left, #ff79c655, transparent 35%),
+    radial-gradient(circle at bottom right, #00e5ff44, transparent 35%),
+    linear-gradient(135deg, #10002b, #3c096c, #001d3d);
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+header h1 {
+    font-size: 36px;
+    background: linear-gradient(90deg, #80ffea, #ff8bd1);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.register {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid #e0aaff;
+    border-radius: 30px;
+    background: #ffffff15;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.card {
+    padding: 25px;
+    margin: 25px 0;
+    border: 1px solid #ffffff35;
+    border-radius: 20px;
+    background: #ffffff12;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px #00000025;
+}
+
+.card h2 {
+    color: #80ffea;
+}
+
+button {
+    padding: 12px 22px;
+    margin: 8px 5px 8px 0;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #80ffea, #c77dff, #ff8bd1);
+    color: #19002e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px #c77dff55;
+}
+
+.result {
+    display: block;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 12px;
+    background: #00000025;
+    color: #80ffea;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+#time {
+    display: block;
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ff8bd1;
+    padding: 20px;
+}
+
+#para1 {
+    font-size: 20px;
+    transition: font-size 0.3s;
+    cursor: pointer;
+    padding: 15px;
+}
+
+#road {
+    height: 110px;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    background: linear-gradient(#80d8ff 0 55%, #555 55% 100%);
+}
+
+#img {
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    font-size: 45px;
+}
+
+.student {
+    padding: 12px;
+    margin: 10px 0;
+    border-left: 3px solid #80ffea;
+    background: #ffffff0d;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #d8c8ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>JavaScript Lab</h1>
+    <p>Interactive JavaScript Programs</p>
+    <div class="register">
+        Register Number: URK24CS9029
+    </div>
+</header>
+
+<div class="container">
+
+<!-- QUESTION 1: DIGITAL CLOCK -->
+
+<section class="card">
+    <h2>Question 1: Digital Clock</h2>
+    <p>Current time:</p>
+    <span id="time"></span>
+</section>
+
+<!-- QUESTION 2: DYNAMIC BACKGROUND -->
+
+<section class="card">
+    <h2>Question 2: Dynamic Background</h2>
+
+    <p>The background colour changes every 30 seconds.</p>
+
+    <button onclick="setBackgroundColor()">
+        Change Colour Now
+    </button>
+
+    <span class="result" id="colorResult">
+        Background colour is ready!
+    </span>
+</section>
+
+<!-- QUESTION 3: CHANGE FONT SIZE -->
+
+<section class="card">
+    <h2>Question 3: Change Font Size</h2>
+
+    <p id="para1"
+       onmouseover="incSize()"
+       onmouseout="decSize()">
+       Move your cursor over me to zoom in!
+    </p>
+
+    <span class="result">
+        Move the mouse over the paragraph and then move it away.
+    </span>
+</section>
+
+<!-- QUESTION 4: MOVING CAR -->
+
+<section class="card">
+    <h2>Question 4: Moving Car</h2>
+
+    <p>Click Move to start the car and Stop to pause it.</p>
+
+    <button onclick="moveRight()">Move Car</button>
+    <button onclick="stop()">Stop Car</button>
+    <button onclick="resetCar()">Reset</button>
+
+    <div id="road">
+        <div id="img" role="img" aria-label="Car">🚗</div>
+    </div>
+
+    <span class="result" id="carStatus">Car is ready!</span>
+</section>
+
+<!-- QUESTION 5: STUDENT OBJECTS -->
+
+<section class="card">
+    <h2>Question 5: Student Details</h2>
+
+    <p>Student names, register numbers and birth-year categories:</p>
+
+    <button onclick="displayStudents()">Display Students</button>
+
+    <div id="students" class="result">
+        Click the button to display student details.
+    </div>
+</section>
+
+</div>
+
+<footer>
+    Made with JavaScript | URK24CS9029
+</footer>
+
+<script>
+
+// QUESTION 1: DIGITAL CLOCK
+
+function display() {
+    var d = new Date();
+
+    var hours = String(d.getHours()).padStart(2, "0");
+    var minutes = String(d.getMinutes()).padStart(2, "0");
+    var seconds = String(d.getSeconds()).padStart(2, "0");
+
+    document.getElementById("time").innerHTML =
+    hours + ":" + minutes + ":" + seconds;
+}
+
+display();
+setInterval(display, 1000);
+
+
+// QUESTION 2: CHANGE BACKGROUND EVERY 30 SECONDS
+
+function setBackgroundColor() {
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+
+    document.body.style.background = color;
+
+    document.getElementById("colorResult").innerHTML =
+    "Current background: " + color;
+}
+
+setInterval(setBackgroundColor, 30000);
+
+
+// QUESTION 3: INCREASE AND DECREASE FONT SIZE
+
+function incSize() {
+    document.getElementById("para1").style.fontSize = "32px";
+}
+
+function decSize() {
+    document.getElementById("para1").style.fontSize = "20px";
+}
+
+
+// QUESTION 4: MOVE AND STOP CAR
+
+var imgObj;
+var animate = null;
+var carPosition = 0;
+
+function init() {
+    imgObj = document.getElementById("img");
+    imgObj.style.left = "0px";
+}
+
+function moveRight() {
+    if (animate !== null) {
+        return;
+    }
+
+    document.getElementById("carStatus").innerHTML =
+    "Car is moving!";
+
+    animate = setInterval(function() {
+        var road = document.getElementById("road");
+        var carWidth = imgObj.offsetWidth;
+        var maxPosition = road.clientWidth - carWidth;
+
+        carPosition += 3;
+
+        if (carPosition > maxPosition) {
+            carPosition = 0;
+        }
+
+        imgObj.style.left = carPosition + "px";
+    }, 30);
+}
+
+function stop() {
+    if (animate !== null) {
+        clearInterval(animate);
+        animate = null;
+    }
+
+    document.getElementById("carStatus").innerHTML =
+    "Car stopped!";
+}
+
+function resetCar() {
+    stop();
+    carPosition = 0;
+    imgObj.style.left = "0px";
+
+    document.getElementById("carStatus").innerHTML =
+    "Car reset to starting position.";
+}
+
+window.addEventListener("load", init);
+
+
+// QUESTION 5: ARRAY OF STUDENT OBJECTS
+
+var student = [
+    { name: "John", regno: "UR13CS129", birthYear: 1995 },
+    { name: "Joseph", regno: "UR13CS456", birthYear: 1998 },
+    { name: "David", regno: "UR24CS123", birthYear: 2003 },
+    { name: "Priya", regno: "UR24CS456", birthYear: 2005 }
+];
+
+function displayStudents() {
+    var output = "";
+
+    for (var i = 0; i < student.length; i++) {
+
+        output += "<div class='student'>";
+
+        output += "<strong>" + student[i].name +
+        "'s Register Number is " + student[i].regno +
+        "</strong><br>";
+
+        output += "Year of Birth: " + student[i].birthYear +
+        "<br>";
+
+        if (student[i].birthYear < 2000) {
+            output += "Category: Born before 2000";
+        }
+        else if (student[i].birthYear > 2000) {
+            output += "Category: Born after 2000";
+        }
+        else {
+            output += "Category: Born in 2000";
+        }
+
+        output += "</div>";
+    }
+
+    document.getElementById("students").innerHTML = output;
+}
+
+</script>
+
+</body>
+</html>
